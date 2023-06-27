@@ -5,4 +5,10 @@ using UnityEngine.Events;
 public class Hole : MonoBehaviour
 {
 //Use events for this?
+
+private void OnTriggerEnter(Collider other) {
+    if(other.gameObject.tag == "Ball"){
+        other.gameObject.SetActive(false);
+    }
+}
 }
