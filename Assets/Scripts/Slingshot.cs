@@ -28,7 +28,7 @@ public class Slingshot : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit, 50, balls))
             {
                 Ball selectedBall = hit.collider.gameObject.GetComponent<Ball>();
-                if (selectedBall != null)
+                if (selectedBall != null && !selectedBall.isMoving)
                 {
                     selectedObject = hit.collider.gameObject;
                     initialLocation = selectedObject.transform.position;
@@ -59,7 +59,7 @@ public class Slingshot : MonoBehaviour
                 Rigidbody BallRB = selectedObject.GetComponent<Rigidbody>();
                 Vector3 direction = (initialLocation - selectedObject.transform.position);
                 BallRB.AddForce(direction * (pullDistance * forceMultiplier), ForceMode.Impulse);
-                cameraController.objectToFollow = selectedObject.GetComponent<Ball>();
+                cameraController.objectToFollowRB = BallRB;
             }
             else
             {

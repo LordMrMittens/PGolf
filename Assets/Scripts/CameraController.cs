@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Ball objectToFollow {get; set;}
+    public Rigidbody objectToFollowRB {get; set;}
+    float objectNullTimeout = .2f;
+    float objectNullCounter = 0f;
     [SerializeField] float verticalOffset;
     // Start is called before the first frame update
     void Start()
@@ -15,15 +17,20 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (objectToFollow != null)
+        if (objectToFollowRB != null)
         {
-            Vector3 newCameraPos = objectToFollow.transform.position;
-            newCameraPos.y = this.transform.position.y;
-            newCameraPos.z -= 3;
-            transform.position = newCameraPos;
-            if (!objectToFollow.isMoving)
+            objectNullCounter += Time.deltaTime;
+            if (objectNullCounter >= objectNullTimeout)
             {
-                objectToFollow = null;
+                Vector3 newCameraPos = objectToFollowRB.transform.position;
+                newCameraPos.y = this.transform.position.y;
+                newCameraPos.z -= 3;
+                transform.position = newCameraPos;
+                if (objectToFollowRB.velocity == Vector3.zero)
+                {
+                    objectNullCounter =0;
+                    objectToFollowRB = null;
+                }
             }
         }
 

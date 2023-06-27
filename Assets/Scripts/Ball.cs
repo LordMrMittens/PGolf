@@ -15,7 +15,11 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-
+        if(ballRB.velocity.magnitude <= .05f){
+            ballRB.velocity = Vector3.zero;
+            ballRB.angularVelocity = Vector3.zero;
+        }
+        isMoving = ballRB.velocity != Vector3.zero;
 
     }
 }
