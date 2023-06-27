@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class Ball : MonoBehaviour
 {
     public bool isMoving { get; set; }
     Rigidbody ballRB;
+ 
 
     private void Start()
     {
@@ -22,4 +23,5 @@ public class Ball : MonoBehaviour
         isMoving = ballRB.velocity != Vector3.zero;
 
     }
+
 }
