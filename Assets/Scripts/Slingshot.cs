@@ -10,10 +10,11 @@ public class Slingshot : MonoBehaviour
     Camera mainCamera;
     GameObject selectedObject;
     CameraController cameraController;
-
-
     [SerializeField] LayerMask balls;
     [SerializeField] LayerMask floor;
+    [SerializeField] GameObject SlingshotPrefab;
+    GameObject Sling;
+    
     void Start()
     {
         mainCamera = Camera.main;
@@ -32,7 +33,8 @@ public class Slingshot : MonoBehaviour
                 {
                     selectedObject = hit.collider.gameObject;
                     initialLocation = selectedObject.transform.position;
-                    
+                    GameObject Slingshot = Instantiate(SlingshotPrefab, initialLocation, Quaternion.identity);
+                    Sling = Slingshot;
                 }
             }
 
@@ -48,6 +50,8 @@ public class Slingshot : MonoBehaviour
                         Vector3 dragPosition = hit.point;
                         dragPosition.y = selectedObject.transform.position.y; // this should be half the selected object so it doesnt go into the ground
                         selectedObject.transform.position = dragPosition;
+
+                        Sling.transform.LookAt(selectedObject.transform, Vector3.up);
                 }
                 pullDistance = Vector3.Distance(selectedObject.transform.position, initialLocation);
             }
@@ -60,6 +64,7 @@ public class Slingshot : MonoBehaviour
                 Vector3 direction = (initialLocation - selectedObject.transform.position);
                 BallRB.AddForce(direction * (pullDistance * forceMultiplier), ForceMode.Impulse);
                 cameraController.objectToFollowRB = BallRB;
+                Destroy(Sling);
             }
             else
             {

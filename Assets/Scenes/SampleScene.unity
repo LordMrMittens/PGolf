@@ -2269,6 +2269,7 @@ MonoBehaviour:
   floor:
     serializedVersion: 2
     m_Bits: 128
+  SlingshotPrefab: {fileID: 1214404966358681961, guid: 59b1d15d51118884f8a48fdaa4183c0d, type: 3}
 --- !u!4 &574246680
 Transform:
   m_ObjectHideFlags: 0
