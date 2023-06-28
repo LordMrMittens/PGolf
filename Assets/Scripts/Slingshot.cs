@@ -47,11 +47,11 @@ public class Slingshot : MonoBehaviour
                 if (Physics.Raycast(ray, out RaycastHit hit, 50, floor))
                 {
 
-                        Vector3 dragPosition = hit.point;
-                        dragPosition.y = selectedObject.transform.position.y; // this should be half the selected object so it doesnt go into the ground
-                        selectedObject.transform.position = dragPosition;
+                    Vector3 dragPosition = hit.point;
+                    dragPosition.y = selectedObject.transform.position.y; // this should be half the selected object so it doesnt go into the ground
+                    selectedObject.transform.position = dragPosition;
 
-                        Sling.transform.LookAt(selectedObject.transform, Vector3.up);
+                    Sling.transform.LookAt(selectedObject.transform, Vector3.up);
                 }
                 pullDistance = Vector3.Distance(selectedObject.transform.position, initialLocation);
             }
@@ -65,6 +65,7 @@ public class Slingshot : MonoBehaviour
                 BallRB.AddForce(direction * (pullDistance * forceMultiplier), ForceMode.Impulse);
                 cameraController.objectToFollowRB = BallRB;
                 Destroy(Sling);
+                GameManager.Instance.AddPointsToScore(1);
             }
             else
             {

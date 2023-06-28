@@ -9,6 +9,7 @@ public class Hole : MonoBehaviour
 private void OnTriggerEnter(Collider other) {
     if(other.gameObject.tag == "Ball"){
         other.gameObject.SetActive(false);
+        GameManager.Instance.DisplayScore();
     }
 }
 }
