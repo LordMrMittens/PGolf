@@ -14,6 +14,8 @@ public class Slingshot : MonoBehaviour
     [SerializeField] LayerMask floor;
     [SerializeField] GameObject SlingshotPrefab;
     GameObject Sling;
+
+    [SerializeField]float dragSpeed = 5f;
     
     void Start()
     {
@@ -49,11 +51,13 @@ public class Slingshot : MonoBehaviour
 
                     Vector3 dragPosition = hit.point;
                     dragPosition.y = selectedObject.transform.position.y; // this should be half the selected object so it doesnt go into the ground
-                    selectedObject.transform.position = dragPosition;
+                    var step = dragSpeed * Time.deltaTime; // calculate distance to move
+                    selectedObject.transform.position = Vector3.MoveTowards(selectedObject.transform.position, dragPosition, step);
 
                     Sling.transform.LookAt(selectedObject.transform, Vector3.up);
                 }
                 pullDistance = Vector3.Distance(selectedObject.transform.position, initialLocation);
+                GameManager.Instance.DisplayPowerLevel(pullDistance*forceMultiplier);
             }
         }
         if (Input.GetMouseButtonUp(0))
@@ -74,6 +78,7 @@ public class Slingshot : MonoBehaviour
 
             selectedObject = null;
             pullDistance = 0;
+            GameManager.Instance.DisplayPowerLevel(0);
         }
     }
 }
