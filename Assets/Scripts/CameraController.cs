@@ -8,14 +8,7 @@ public class CameraController : MonoBehaviour
     float objectNullTimeout = .2f;
     float objectNullCounter = 0f;
     [SerializeField] float verticalOffset;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (objectToFollowRB != null)
         {
@@ -34,5 +27,13 @@ public class CameraController : MonoBehaviour
             }
         }
 
+    }
+
+    public void ResetCameraPosition(Vector3 target)
+    {
+        Vector3 newCameraPos = target;
+        newCameraPos.y = this.transform.position.y;
+        newCameraPos.z -= 3;
+        transform.position = newCameraPos;
     }
 }
