@@ -57,7 +57,7 @@ public class Slingshot : MonoBehaviour
                     Sling.transform.LookAt(selectedObject.transform, Vector3.up);
                 }
                 pullDistance = Vector3.Distance(selectedObject.transform.position, initialLocation);
-                GameManager.Instance.DisplayPowerLevel(pullDistance*forceMultiplier);
+                GameManager.Instance.DisplayPowerLevel(pullDistance*forceMultiplier, true);
             }
         }
         if (Input.GetMouseButtonUp(0))
@@ -79,7 +79,7 @@ public class Slingshot : MonoBehaviour
 
             selectedObject = null;
             pullDistance = 0;
-            GameManager.Instance.DisplayPowerLevel(0);
+            GameManager.Instance.DisplayPowerLevel(0, false);
         }
     }
 }

@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject endOfGamePanel;
     [SerializeField] TMP_Text endOfGameScoreText;
+    [SerializeField] GameObject powerLevelPanel;
     [SerializeField] TMP_Text powerLevelText;
     public void DisplayEndOfGameScore(int par, int currentScore)
     {
@@ -17,5 +18,8 @@ public class UIManager : MonoBehaviour
     public void UpdatePowerLevel(float powerLevel)
     {
         powerLevelText.text = powerLevel.ToString();
+    }
+    public void TogglePowerLevelPanel(bool shouldBeOn){
+        powerLevelPanel.SetActive(shouldBeOn);
     }
 }

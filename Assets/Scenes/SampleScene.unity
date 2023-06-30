@@ -3245,6 +3245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8fae91026165247a7d803ac4140466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectNullTimeout: 0.2
   horizontalRotationSpeed: 2
   verticalRotationSpeed: 1
   verticalOffset: 7
@@ -5822,6 +5823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endOfGamePanel: {fileID: 1652414928}
   endOfGameScoreText: {fileID: 486723868}
+  powerLevelPanel: {fileID: 1525540821}
   powerLevelText: {fileID: 1807863941}
 --- !u!43 &1933200557
 Mesh:

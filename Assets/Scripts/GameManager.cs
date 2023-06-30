@@ -37,14 +37,15 @@ public class GameManager : MonoBehaviour
     {
         uIManager.DisplayEndOfGameScore(par,currentScore);
     }
-    public void DisplayPowerLevel(float powerLevel){
+    public void DisplayPowerLevel(float powerLevel, bool shouldPanelBeOn){
         uIManager.UpdatePowerLevel(powerLevel);
+        uIManager.TogglePowerLevelPanel(shouldPanelBeOn);
     }
 
     public void ResetGame()
     {
         currentScore = 0;
-        DisplayPowerLevel(0);
+        DisplayPowerLevel(0, false);
         Vector3 startingPoint = Vector3.zero;
         Vector3 goalPoint = Vector3.zero;
         do
