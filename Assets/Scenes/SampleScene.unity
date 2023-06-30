@@ -3247,14 +3247,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalRotationSpeed: 2
   verticalRotationSpeed: 1
-  verticalOffset: 5
+  verticalOffset: 7
+  horizontalOffset: 3
 --- !u!43 &1138461509
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27680
+  m_Name: pb_Mesh27666
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

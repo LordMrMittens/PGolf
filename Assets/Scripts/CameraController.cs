@@ -5,32 +5,38 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Rigidbody objectToFollowRB { get; set; }
-    float objectNullTimeout = .2f;
-    float objectNullCounter = 0f;
-    Vector3 playerPosition;
-    Vector3 goalPosition;
+    [SerializeField] private float objectNullTimeout = .2f;
+    private float objectNullCounter = 0f;
 
-    [SerializeField] float horizontalRotationSpeed = 3f;
-    [SerializeField] float verticalRotationSpeed = 2f;
-    [SerializeField] float verticalOffset;
-    [SerializeField] float horizontalOffset=3;
-    void LateUpdate()
+    [SerializeField] private float horizontalRotationSpeed = 3f;
+    [SerializeField] private float verticalRotationSpeed = 2f;
+    [SerializeField] private float verticalOffset = 6f;
+    [SerializeField] private float horizontalOffset = 3f;
+
+    private float minLookAngle = 0f;
+    private float maxLookAngle = 60f;
+
+    private Vector3 playerPosition;
+    private Vector3 goalPosition;
+    private Vector3 directionOfShot;
+
+    private void LateUpdate()
     {
-
         if (objectToFollowRB != null)
         {
             objectNullCounter += Time.deltaTime;
             if (objectNullCounter >= objectNullTimeout)
             {
-                Vector3 newCameraPos = objectToFollowRB.transform.position;
-                newCameraPos.y = this.transform.position.y;
-                newCameraPos.z -= horizontalOffset;
+                Vector3 newCameraPos = objectToFollowRB.transform.position - (directionOfShot * horizontalOffset);
+                newCameraPos.y = transform.position.y;
                 transform.position = newCameraPos;
+                transform.LookAt(objectToFollowRB.transform.position);
                 if (objectToFollowRB.velocity == Vector3.zero)
                 {
-                    objectNullCounter =0;
+                    objectNullCounter = 0;
                     playerPosition = objectToFollowRB.transform.position;
                     objectToFollowRB = null;
+                    ResetCameraPosition(playerPosition, goalPosition);
                 }
             }
         }
@@ -41,29 +47,29 @@ public class CameraController : MonoBehaviour
 
             transform.RotateAround(playerPosition, Vector3.up, horizontalInput * horizontalRotationSpeed);
 
-            // Calculate the new camera position after horizontal rotation
             Vector3 newCameraPos = transform.position;
             newCameraPos.y = playerPosition.y + verticalOffset;
 
-            // Tilt the camera vertically based on input
-            float verticalAngle = Mathf.Clamp(transform.eulerAngles.x - verticalInput * verticalRotationSpeed, 0f, 60f);
+            float verticalAngle = Mathf.Clamp(transform.eulerAngles.x - verticalInput * verticalRotationSpeed, minLookAngle, maxLookAngle);
             transform.rotation = Quaternion.Euler(verticalAngle, transform.eulerAngles.y, transform.eulerAngles.z);
 
-            // Set the camera position after vertical tilt
             transform.position = newCameraPos;
         }
-
     }
 
     public void ResetCameraPosition(Vector3 target, Vector3 goalTargetPosition)
     {
-        Vector3 newCameraPos = target;
         goalPosition = goalTargetPosition;
         playerPosition = target;
-        newCameraPos.y = this.transform.position.y;
-        newCameraPos.z -= horizontalOffset;
+        Vector3 direction = (goalTargetPosition - target).normalized;
+        Vector3 newCameraPos = target - (direction * horizontalOffset);
+        newCameraPos.y = transform.position.y;
         transform.position = newCameraPos;
-        
-        
+        transform.LookAt(target);
+    }
+
+    public void SetShotDirection(Vector3 _directionOfShot)
+    {
+        directionOfShot = _directionOfShot;
     }
 }
