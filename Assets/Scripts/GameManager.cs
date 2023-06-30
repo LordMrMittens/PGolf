@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         Instantiate(startingPointPrefab, startingPoint, Quaternion.identity);
         Instantiate(ballPrefab, startingPoint+ballSpawnVerticalOffset, Quaternion.identity);
         Instantiate(goalPrefab, goalPoint, Quaternion.identity);
-        Camera.main.GetComponent<CameraController>().ResetCameraPosition(startingPoint);
+        Camera.main.GetComponent<CameraController>().ResetCameraPosition(startingPoint, goalPoint);
     }
 
     Vector3 GenerateRandomPointInLevel()

@@ -3245,7 +3245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8fae91026165247a7d803ac4140466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalOffset: 10
+  horizontalRotationSpeed: 2
+  verticalRotationSpeed: 1
+  verticalOffset: 5
 --- !u!43 &1138461509
 Mesh:
   m_ObjectHideFlags: 0
