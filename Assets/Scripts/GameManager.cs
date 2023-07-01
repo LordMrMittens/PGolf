@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject startingPointPrefab;
     [SerializeField] GameObject goalPrefab;
     [SerializeField] GameObject ballPrefab;
+    [SerializeField] GameObject obstaclePrefab; 
     [SerializeField] GameObject stage;  
+    [SerializeField] int numberOfObstacles = 4;
     [SerializeField] float minDistanceFromObstacles = .1f;
     [SerializeField] float minDistanceBetweenStartAndGoal = 1;
     [SerializeField] LayerMask ObstacleLayers;
@@ -46,6 +48,30 @@ public class GameManager : MonoBehaviour
     {
         currentScore = 0;
         DisplayPowerLevel(0, false);
+        SpawnObstacles();
+        SpawnStartAndGoalPoints();
+    }
+
+        public void SpawnObstacles()
+    {
+            for (int i = 0; i < numberOfObstacles; i++)
+        {
+            
+            float randomRotation;
+            Vector3 ObstacleLocation = SetObstacleLocationAndRotation(out randomRotation);
+            GameObject obstacle = Instantiate(obstaclePrefab, ObstacleLocation, Quaternion.identity);
+            obstacle.transform.Rotate(0, randomRotation, 0);
+        }
+    }
+
+    Vector3 SetObstacleLocationAndRotation(out float randomRotation)
+    {
+        randomRotation = Random.Range(0f, 360f);
+        return GenerateRandomPointInLevel();
+    }
+
+    private void SpawnStartAndGoalPoints()
+    {
         Vector3 startingPoint = Vector3.zero;
         Vector3 goalPoint = Vector3.zero;
         do
@@ -54,7 +80,7 @@ public class GameManager : MonoBehaviour
             goalPoint = GenerateRandomPointInLevel();
         } while (Vector3.Distance(startingPoint, goalPoint) < minDistanceBetweenStartAndGoal);
         Instantiate(startingPointPrefab, startingPoint, Quaternion.identity);
-        Instantiate(ballPrefab, startingPoint+ballSpawnVerticalOffset, Quaternion.identity);
+        Instantiate(ballPrefab, startingPoint + ballSpawnVerticalOffset, Quaternion.identity);
         Instantiate(goalPrefab, goalPoint, Quaternion.identity);
         Camera.main.GetComponent<CameraController>().ResetCameraPosition(startingPoint, goalPoint);
     }
