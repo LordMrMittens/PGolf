@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
         if (Physics.OverlapSphere(randomLocation, minDistanceFromObstacles, ObstacleLayers).Length > 0)
         {
             
-           GenerateRandomPointInLevel();
+           return GenerateRandomPointInLevel();
         }
         return randomLocation;
 
