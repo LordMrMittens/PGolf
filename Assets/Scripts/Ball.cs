@@ -6,6 +6,8 @@ public class Ball : MonoBehaviour
 {
     public bool isMoving { get; set; }
     Rigidbody ballRB;
+
+    [SerializeField] float ballStopVelocityOverride = .1f;
  
 
     private void Start()
@@ -16,7 +18,7 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        if(ballRB.velocity.magnitude <= .05f){
+        if(ballRB.velocity.magnitude <= ballStopVelocityOverride){
             ballRB.velocity = Vector3.zero;
             ballRB.angularVelocity = Vector3.zero;
         }

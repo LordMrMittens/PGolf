@@ -16,6 +16,7 @@ public class Slingshot : MonoBehaviour
     GameObject Sling;
 
     [SerializeField]float dragSpeed = 5f;
+    [SerializeField] float MaxPullDistance = 10f;
     
     void Start()
     {
@@ -45,19 +46,26 @@ public class Slingshot : MonoBehaviour
         {
             if (selectedObject != null)
             {
+                pullDistance = Vector3.Distance(selectedObject.transform.position, initialLocation);
                 Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hit, 50, floor))
                 {
 
                     Vector3 dragPosition = hit.point;
                     dragPosition.y = selectedObject.transform.position.y; // this should be half the selected object so it doesnt go into the ground
-                    var step = dragSpeed * Time.deltaTime; // calculate distance to move
-                    selectedObject.transform.position = Vector3.MoveTowards(selectedObject.transform.position, dragPosition, step);
-
+                    var step = dragSpeed * Time.deltaTime; // calculate distance to move towards cursor
+                    if (pullDistance * forceMultiplier <= MaxPullDistance)
+                    {
+                        selectedObject.transform.position = Vector3.MoveTowards(selectedObject.transform.position, dragPosition, step);
+                    }
+                    else
+                    {
+                        selectedObject.transform.position = Vector3.MoveTowards(selectedObject.transform.position,initialLocation, step);
+                    }
                     Sling.transform.LookAt(selectedObject.transform, Vector3.up);
                 }
-                pullDistance = Vector3.Distance(selectedObject.transform.position, initialLocation);
-                GameManager.Instance.DisplayPowerLevel(pullDistance*forceMultiplier, true);
+
+                GameManager.Instance.DisplayPowerLevel(pullDistance * forceMultiplier, true);
             }
         }
         if (Input.GetMouseButtonUp(0))
