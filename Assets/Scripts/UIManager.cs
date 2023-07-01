@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject powerLevelPanel;
     [SerializeField] TMP_Text powerLevelText;
     [SerializeField] Slider powerLevelBar;
+    [SerializeField] Image powerLevelImage;
     public void DisplayEndOfGameScore(int par, int currentScore)
     {
         endOfGamePanel.SetActive(true);
@@ -19,8 +20,16 @@ public class UIManager : MonoBehaviour
 
     public void UpdatePowerLevel(float powerLevel)
     {
-        powerLevelText.text = powerLevel.ToString();
+        powerLevelText.text = powerLevel.ToString("F1");
         powerLevelBar.value = powerLevel;
+
+        float normalizedValue = Mathf.Clamp01(powerLevel / 10f);
+        Color lerpedColor = Color.Lerp(Color.green, Color.yellow, normalizedValue);
+        if (normalizedValue >= 0.5f)
+        {
+            lerpedColor = Color.Lerp(Color.yellow, Color.red, (normalizedValue - 0.5f) * 2f);
+        }
+        powerLevelImage.color = lerpedColor;
     }
     public void TogglePowerLevelPanel(bool shouldBeOn){
         powerLevelPanel.SetActive(shouldBeOn);
