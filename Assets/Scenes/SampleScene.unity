@@ -4408,8 +4408,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectNullTimeout: 0.2
-  horizontalRotationSpeed: 2
-  verticalRotationSpeed: 1
+  horizontalRotationSpeed: 0.2
+  verticalRotationSpeed: 0.2
   verticalOffset: 7
   horizontalOffset: 3
 --- !u!43 &1077205110
