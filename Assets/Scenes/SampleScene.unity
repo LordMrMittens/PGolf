@@ -2832,6 +2832,50 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1384064723
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1384064725}
+  - component: {fileID: 1384064724}
+  m_Layer: 0
+  m_Name: SceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1384064724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384064723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 358b782f90d46ae4d862b52d42c90db9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1384064725
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384064723}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 427.40515, y: 250.77322, z: -20.993938}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1427724116
 GameObject:
   m_ObjectHideFlags: 0
@@ -3395,8 +3439,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1917155727}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1384064724}
+        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
         m_MethodName: LoadNewScene
         m_Mode: 1
         m_Arguments:
@@ -4138,6 +4182,111 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1864291455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1864291457}
+  - component: {fileID: 1864291456}
+  m_Layer: 0
+  m_Name: LevelCreationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1864291456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864291455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3194ea2ca69333342b3cdb3169fdcda6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingPointPrefab: {fileID: 8135406430683349725, guid: 771ab2e126d03724b969bb73a89db080, type: 3}
+  goalPrefab: {fileID: 8135406430683349725, guid: 566de47a1dca5fa469486b37cbb0548c, type: 3}
+  ballPrefab: {fileID: 5080804293660045877, guid: eb1cdd1f05c50b5498e1bf59566e59f0, type: 3}
+  obstaclePrefab: {fileID: 759610980796211689, guid: 83f86fbaf6fc361419c458142e7d3b77, type: 3}
+  stage: {fileID: 1289895534}
+  numberOfObstacles: 4
+  minDistanceFromObstacles: 4
+  minDistanceBetweenStartAndGoal: 10
+  ObstacleLayers:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!4 &1864291457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864291455}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 427.40515, y: 250.77322, z: -20.993938}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1892176657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1892176659}
+  - component: {fileID: 1892176658}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1892176658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892176657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf5344ceb4ab3c4897eb5edc43d01af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endOfGamePanel: {fileID: 1652414928}
+  endOfGameScoreText: {fileID: 486723868}
+  powerLevelPanel: {fileID: 1525540821}
+  powerLevelText: {fileID: 1807863941}
+  powerLevelBar: {fileID: 1895372865}
+  powerLevelImage: {fileID: 1911164812}
+--- !u!4 &1892176659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892176657}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 427.40515, y: 250.77322, z: -20.993938}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1895372864
 GameObject:
   m_ObjectHideFlags: 0
@@ -4314,7 +4463,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1917155728}
   - component: {fileID: 1917155727}
-  - component: {fileID: 1917155729}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4335,20 +4483,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <par>k__BackingField: 2
-  uIManager: {fileID: 1917155729}
-  startingPointPrefab: {fileID: 8135406430683349725, guid: 771ab2e126d03724b969bb73a89db080, type: 3}
-  goalPrefab: {fileID: 8135406430683349725, guid: 566de47a1dca5fa469486b37cbb0548c, type: 3}
-  ballPrefab: {fileID: 5080804293660045877, guid: eb1cdd1f05c50b5498e1bf59566e59f0, type: 3}
-  obstaclePrefab: {fileID: 759610980796211689, guid: 83f86fbaf6fc361419c458142e7d3b77, type: 3}
-  stage: {fileID: 1289895534}
-  numberOfObstacles: 5
-  minDistanceFromObstacles: 7
-  minDistanceBetweenStartAndGoal: 7
-  ObstacleLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  sceneToLoad:
-    m_Handle: 0
 --- !u!4 &1917155728
 Transform:
   m_ObjectHideFlags: 0
@@ -4364,24 +4498,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1917155729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917155726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bf5344ceb4ab3c4897eb5edc43d01af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  endOfGamePanel: {fileID: 1652414928}
-  endOfGameScoreText: {fileID: 486723868}
-  powerLevelPanel: {fileID: 1525540821}
-  powerLevelText: {fileID: 1807863941}
-  powerLevelBar: {fileID: 1895372865}
-  powerLevelImage: {fileID: 1911164812}
 --- !u!43 &1933200557
 Mesh:
   m_ObjectHideFlags: 0

@@ -22,6 +22,7 @@ public class Slingshot : MonoBehaviour
     {
         mainCamera = Camera.main;
         cameraController = mainCamera.GetComponent<CameraController>();
+        GameManager.Instance.ResetGame();
     }
     void Update()
     {
