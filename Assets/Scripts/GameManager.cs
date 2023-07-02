@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] float minDistanceBetweenStartAndGoal = 1;
     [SerializeField] LayerMask ObstacleLayers;
     Vector3 ballSpawnVerticalOffset = new Vector3(0,.3f,0);
+
+    [SerializeField] Scene sceneToLoad;
     // Start is called before the first frame update
     void Start()
     {
@@ -99,5 +102,7 @@ public class GameManager : MonoBehaviour
         return randomLocation;
     }
 
-    
+    public void LoadNewScene(){
+        SceneManager.LoadScene(0);
+    }
 }
