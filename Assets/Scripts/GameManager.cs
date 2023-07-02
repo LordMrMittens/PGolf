@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] LayerMask ObstacleLayers;
     Vector3 ballSpawnVerticalOffset = new Vector3(0,.3f,0);
 
-    [SerializeField] Scene sceneToLoad;
     // Start is called before the first frame update
     void Start()
     {
