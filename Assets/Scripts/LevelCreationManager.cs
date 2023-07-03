@@ -8,8 +8,10 @@ public class LevelCreationManager : MonoBehaviour
     [SerializeField] GameObject goalPrefab;
     [SerializeField] GameObject ballPrefab;
     [SerializeField] GameObject obstaclePrefab;
+    [SerializeField] GameObject bumperPrefab;
     [SerializeField] GameObject stage;
     [SerializeField] int numberOfObstacles = 4;
+    [SerializeField] int numberOfBumpers = 4;
     [SerializeField] float minDistanceFromObstacles = .1f;
     [SerializeField] float minDistanceBetweenStartAndGoal = 1;
     [SerializeField] LayerMask ObstacleLayers;
@@ -22,6 +24,7 @@ public class LevelCreationManager : MonoBehaviour
     public void SetupGame()
     {
         SpawnObstacles();
+        SpawnBumpers();
         SpawnStartAndGoalPoints();
     }
     public void SpawnObstacles()
@@ -32,6 +35,16 @@ public class LevelCreationManager : MonoBehaviour
             Vector3 ObstacleLocation = SetObstacleLocationAndRotation(out randomRotation);
             GameObject obstacle = Instantiate(obstaclePrefab, ObstacleLocation, Quaternion.identity);
             obstacle.transform.Rotate(0, randomRotation, 0);
+        }
+    }
+        public void SpawnBumpers()
+    {
+        for (int i = 0; i < numberOfBumpers; i++)
+        {
+            float randomRotation;
+            Vector3 bumperLocation = SetObstacleLocationAndRotation(out randomRotation);
+            GameObject bumper = Instantiate(bumperPrefab, bumperLocation, Quaternion.identity);
+            bumper.transform.Rotate(0, randomRotation, 0);
         }
     }
 
