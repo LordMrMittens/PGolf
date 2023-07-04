@@ -9,7 +9,7 @@ public class LevelCreationManager : MonoBehaviour
     [SerializeField] GameObject ballPrefab;
     [SerializeField] GameObject[] obstaclePrefabs;
     [SerializeField] GameObject bumperPrefab;
-    [SerializeField] GameObject stage;
+    GameObject stage;
     [SerializeField] int numberOfObstacles = 4;
     [SerializeField] int numberOfBumpers = 4;
     [SerializeField] float minDistanceFromObstacles = .1f;
@@ -19,6 +19,7 @@ public class LevelCreationManager : MonoBehaviour
 
 
     private void Awake() {
+        stage = GameObject.FindGameObjectWithTag("Ground");
         SetupGame();
     }
     public void SetupGame()
@@ -32,7 +33,6 @@ public class LevelCreationManager : MonoBehaviour
         for (int i = 0; i < numberOfObstacles; i++)
         {
             int randomObstaclePrefabIndex = Random.Range(0, obstaclePrefabs.Length);
-            Debug.Log(obstaclePrefabs.Length);
             float randomRotation;
             Vector3 ObstacleLocation = SetObstacleLocationAndRotation(out randomRotation);
             GameObject obstacle = Instantiate(obstaclePrefabs[randomObstaclePrefabIndex], ObstacleLocation, Quaternion.identity);
