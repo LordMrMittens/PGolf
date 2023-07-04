@@ -7,7 +7,7 @@ public class LevelCreationManager : MonoBehaviour
     [SerializeField] GameObject startingPointPrefab;
     [SerializeField] GameObject goalPrefab;
     [SerializeField] GameObject ballPrefab;
-    [SerializeField] GameObject obstaclePrefab;
+    [SerializeField] GameObject[] obstaclePrefabs;
     [SerializeField] GameObject bumperPrefab;
     [SerializeField] GameObject stage;
     [SerializeField] int numberOfObstacles = 4;
@@ -31,9 +31,11 @@ public class LevelCreationManager : MonoBehaviour
     {
         for (int i = 0; i < numberOfObstacles; i++)
         {
+            int randomObstaclePrefabIndex = Random.Range(0, obstaclePrefabs.Length);
+            Debug.Log(obstaclePrefabs.Length);
             float randomRotation;
             Vector3 ObstacleLocation = SetObstacleLocationAndRotation(out randomRotation);
-            GameObject obstacle = Instantiate(obstaclePrefab, ObstacleLocation, Quaternion.identity);
+            GameObject obstacle = Instantiate(obstaclePrefabs[randomObstaclePrefabIndex], ObstacleLocation, Quaternion.identity);
             obstacle.transform.Rotate(0, randomRotation, 0);
         }
     }
