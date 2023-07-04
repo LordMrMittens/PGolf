@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingObstacles : MonoBehaviour
+public class MovingObstacles : Obstacle
 {
     GameObject stage;
     [SerializeField] float movingspeed;

@@ -389,4 +389,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a264dfd0cffa88041beedf0f7e81adc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <bumperForce>k__BackingField: 2
   rotationSpeed: {x: 0, y: 0.5, z: 0}

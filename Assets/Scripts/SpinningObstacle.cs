@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpinningObstacle : MonoBehaviour
+public class SpinningObstacle : Obstacle
 {
 
     [SerializeField] Vector3 rotationSpeed= Vector3.up;
