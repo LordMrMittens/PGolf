@@ -12,10 +12,19 @@ public class UIManager : MonoBehaviour
     [SerializeField] TMP_Text powerLevelText;
     [SerializeField] Slider powerLevelBar;
     [SerializeField] Image powerLevelImage;
+    [SerializeField] TMP_Text levelParText;
+    [SerializeField] TMP_Text scoreText;
     public void DisplayEndOfGameScore(int par, int currentScore)
     {
         endOfGamePanel.SetActive(true);
         endOfGameScoreText.text = $"Level Par: {par} <br> Your Score: {currentScore}";
+    }
+
+    public void UpdateLevelPar(int par){
+        levelParText.text = par.ToString();
+    }
+        public void UpdateScore(int score){
+        scoreText.text = score.ToString();
     }
 
     public void UpdatePowerLevel(float powerLevel)

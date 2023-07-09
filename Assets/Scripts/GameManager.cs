@@ -24,6 +24,7 @@ public class GameManager : Singleton<GameManager>
     public void AddPointsToScore(int points)
     {
         currentScore += points;
+        uIManager.UpdateScore(currentScore);
     }
     public void EndOfGame()
     {
@@ -39,7 +40,9 @@ public class GameManager : Singleton<GameManager>
         AssignManagers();
         currentScore = 0;
         DisplayPowerLevel(0, false);
-        //levelCreator.SetupGame();
+        uIManager.UpdateLevelPar(par);
+        uIManager.UpdateScore(currentScore);
+
     }
 
 }
