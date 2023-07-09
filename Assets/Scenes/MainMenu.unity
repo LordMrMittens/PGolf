@@ -1185,7 +1185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4046fc7986854f4082754b1ccbda2c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minNumberOfStages: 0
+  minNumberOfStages: 1
   maxNumberOfStages: 18
   holesInputField: {fileID: 491591768}
 --- !u!4 &943081172
