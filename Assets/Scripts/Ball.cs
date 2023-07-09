@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 public class Ball : MonoBehaviour
 {
+    BreakableObstacleColour BallColour;
     public bool isMoving { get; set; }
     Rigidbody ballRB;
 
@@ -14,6 +15,7 @@ public class Ball : MonoBehaviour
     {
         isMoving = true;
         ballRB = GetComponent<Rigidbody>();
+        BallColour = BreakableObstacleColour.red;
     }
 
     private void Update()
@@ -23,7 +25,14 @@ public class Ball : MonoBehaviour
             ballRB.angularVelocity = Vector3.zero;
         }
         isMoving = ballRB.velocity != Vector3.zero;
+        RandomiseBallColour();
+    }
 
+    public void RandomiseBallColour(){
+        int indexColour = Random.Range(1, System.Enum.GetValues(typeof(BreakableObstacleColour)).Length+1);
+        {
+            BallColour = (BreakableObstacleColour)indexColour;
+        }
     }
 
 }
