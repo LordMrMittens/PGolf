@@ -7,7 +7,7 @@ public class Ball : MonoBehaviour
     BreakableObstacleColour BallColour;
     public bool isMoving { get; set; }
     Rigidbody ballRB;
-
+    ParticleSystem particles;
     [SerializeField] float ballStopVelocityOverride = .1f;
  
 
@@ -16,6 +16,7 @@ public class Ball : MonoBehaviour
         isMoving = true;
         ballRB = GetComponent<Rigidbody>();
         BallColour = BreakableObstacleColour.red;
+        particles = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Update()
@@ -25,7 +26,7 @@ public class Ball : MonoBehaviour
             ballRB.angularVelocity = Vector3.zero;
         }
         isMoving = ballRB.velocity != Vector3.zero;
-        RandomiseBallColour();
+        
     }
 
     public void RandomiseBallColour(){
@@ -33,6 +34,26 @@ public class Ball : MonoBehaviour
         {
             BallColour = (BreakableObstacleColour)indexColour;
         }
+        ParticleSystem.MainModule main = particles.main;
+        switch (BallColour)
+        {
+            case BreakableObstacleColour.red:
+                main.startColor = Color.red;
+                break;
+            case BreakableObstacleColour.blue:
+                main.startColor = Color.blue;
+                break;
+            case BreakableObstacleColour.green:
+                main.startColor = Color.green;
+                break;
+            case BreakableObstacleColour.yellow:
+                main.startColor = Color.yellow;
+                break;
+        }
+
+    }
+    public BreakableObstacleColour GetBallColour(){
+        return BallColour;
     }
 
 }
