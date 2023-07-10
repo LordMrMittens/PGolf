@@ -15,7 +15,8 @@ public class ProcLevelGenerator : MonoBehaviour
         List<GameObject> piecesInLevel = new List<GameObject>();
         for (int i = 0; i < numberOfPieces; i++)
         {
-            if(currentSpawn == null){
+            if (currentSpawn == null)
+            {
                 return;
             }
             int pieceInt = Random.Range(0, levelPieces.Length);
@@ -29,7 +30,7 @@ public class ProcLevelGenerator : MonoBehaviour
                 currentSpawn = piece.GetSpawnSocket();
                 continue;
             }
-            
+
             Vector3 direction = levelPiece.transform.position - piece.parent.gameObject.transform.position;
             levelPiece.transform.position += direction;
             levelPiece.transform.parent = piece.parent.transform;
@@ -37,16 +38,27 @@ public class ProcLevelGenerator : MonoBehaviour
             piece.RemoveInvalidSocket(currentSpawn);
 
             currentSpawn = piece.GetSpawnSocket();
-            if(currentSpawn ==null){
-                
+            if (currentSpawn == null)
+            {
+                currentSpawn = CheckForValidSpawnPoint(piece);
             }
-
-            //verify it doesnt overlap with other pieces
-            //find the next socket
-            //verify it does not go backwards into the existing scene
             //continue
         }
     }
+
+    private static Transform CheckForValidSpawnPoint(LevelPiece piece)
+    {
+
+        Transform newSpawn = piece.parent.GetSpawnSocket();
+        if (newSpawn == null)
+        {
+            return CheckForValidSpawnPoint(piece.parent);
+        }
+        return newSpawn;
+    }
+
+
+
 
     // Update is called once per frame
     void Update()
