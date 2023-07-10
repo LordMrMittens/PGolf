@@ -21,26 +21,36 @@ public class ProcLevelGenerator : MonoBehaviour
             }
             int pieceInt = Random.Range(0, levelPieces.Length);
             GameObject levelPiece = Instantiate(levelPieces[pieceInt], currentSpawn.position, Quaternion.identity);
-            LevelPiece piece = levelPiece.AddComponent<LevelPiece>();
-            piece.AddSockets();
+            LevelPiece pieceController = levelPiece.GetComponent<LevelPiece>();
+            pieceController.AddSockets();
             piecesInLevel.Add(levelPiece);
-            piece.parent = currentSpawn.GetComponentInParent<LevelPiece>();
-            if (!piece.parent)
+            pieceController.parent = currentSpawn.GetComponentInParent<LevelPiece>();
+            if (!pieceController.parent)
             {
-                currentSpawn = piece.GetSpawnSocket();
+                currentSpawn = pieceController.GetSpawnSocket();
                 continue;
             }
+            if (!pieceController.bIsSquare)
+            {
+                // what if the piece is not square
+                //rotate piece si it faces the right direction
+                //move piece so it borders the previous one
+            }
+            else
+            {
+                Vector3 direction = levelPiece.transform.position - pieceController.parent.gameObject.transform.position;
+                levelPiece.transform.position += direction;
+            }
 
-            Vector3 direction = levelPiece.transform.position - piece.parent.gameObject.transform.position;
-            levelPiece.transform.position += direction;
-            levelPiece.transform.parent = piece.parent.transform;
 
-            piece.RemoveInvalidSocket(currentSpawn);
+            levelPiece.transform.parent = pieceController.parent.transform;
 
-            currentSpawn = piece.GetSpawnSocket();
+            pieceController.RemoveInvalidSocket(currentSpawn);
+
+            currentSpawn = pieceController.GetSpawnSocket();
             if (currentSpawn == null)
             {
-                currentSpawn = CheckForValidSpawnPoint(piece);
+                currentSpawn = CheckForValidSpawnPoint(pieceController);
             }
             //continue
         }

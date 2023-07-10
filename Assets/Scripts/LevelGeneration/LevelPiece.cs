@@ -6,6 +6,8 @@ public class LevelPiece : MonoBehaviour
 {
     public List<Transform> sockets = new List<Transform>();
     public LevelPiece parent;
+
+    public bool bIsSquare;
     
     int getSocketTries = 10;
 
@@ -39,6 +41,10 @@ public class LevelPiece : MonoBehaviour
             sockets.Remove(socketToRemove);
             Debug.Log("Socket Removed: " + socketToRemove.name);
         }
+    }
+    public Transform GetAttachmentSocket(){
+        int indexToReturn = GenerateRandomIndex();
+        return sockets[indexToReturn];
     }
 
     public Transform GetSpawnSocket()
