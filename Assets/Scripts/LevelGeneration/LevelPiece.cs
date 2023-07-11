@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class LevelPiece : MonoBehaviour
+class APiece
 {
     public List<Transform> sockets = new List<Transform>();
-    public LevelPiece parent;
-
+    public APiece parent;
+    public GameObject levelPieceObject;
     public bool bIsSquare;
-    
     int getSocketTries = 10;
 
+    public void NewPiece(APiece _parent, GameObject _levelPiece)
+    {
+        parent = _parent;
+        levelPieceObject = _levelPiece;
+    }
     public void AddSockets()
     {
-        foreach (Transform SocketTransform in this.transform)
+        foreach (Transform SocketTransform in levelPieceObject.transform)
         {
             if (SocketTransform.CompareTag("Socket"))
             {
@@ -42,7 +45,8 @@ public class LevelPiece : MonoBehaviour
             Debug.Log("Socket Removed: " + socketToRemove.name);
         }
     }
-    public Transform GetAttachmentSocket(){
+    public Transform GetAttachmentSocket()
+    {
         int indexToReturn = GenerateRandomIndex();
         return sockets[indexToReturn];
     }
@@ -51,7 +55,7 @@ public class LevelPiece : MonoBehaviour
     {
         int indexToReturn = GenerateRandomIndex();
 
-        if (indexToReturn != -1 && getSocketTries >0)
+        if (indexToReturn != -1 && getSocketTries > 0)
         {
 
             if (Physics.OverlapSphere(sockets[indexToReturn].position, 3).Length > 1)
