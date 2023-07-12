@@ -53,7 +53,7 @@ namespace LevelGeneration
                     Vector3 direction = levelPiece.transform.position - piece.parent.levelPieceObject.transform.position;
                     levelPiece.transform.position += direction;
                 }
-                levelPiece.transform.parent = piece.parent.levelPieceObject.transform;
+               // levelPiece.transform.parent = piece.parent.levelPieceObject.transform;
                 piece.RemoveInvalidSocket(currentSpawn);
                 currentSpawn = piece.GetSpawnSocket();
                 if (currentSpawn == null)
@@ -63,7 +63,7 @@ namespace LevelGeneration
                 endPiece = levelPiece;
                 //continue
             }
-
+            VerifyPositions();
             GenerateWalls();
         }
 
@@ -123,22 +123,32 @@ namespace LevelGeneration
 
         void VerifyPositions(){
             List<GameObject> piecesToDestroy = new List<GameObject>();
-
+            List<GameObject> piecesToKeep = new List<GameObject>();
+            GameObject pieceToDestroy;
             for (int i = 0; i < piecesInLevel.Count; i++)
             {
                 for (int j = 0; j < piecesInLevel.Count; j++)
                 {
                     float pieceDistance = Vector3.Distance(piecesInLevel[i].transform.position, piecesInLevel[j].transform.position);
-                    if (pieceDistance > 1)
+                    Debug.Log(pieceDistance);
+                    if (pieceDistance < .1)
                     {
-                        if (piecesInLevel[i] != endPiece && piecesInLevel[i] != startPiece)
+                        if ((piecesInLevel[i] == endPiece || piecesInLevel[i] == startPiece) && piecesInLevel[i] != piecesInLevel[j])
                         {
-                            piecesToDestroy.Add(piecesInLevel[i]);
-                        } else {
                             piecesToDestroy.Add(piecesInLevel[j]);
+                        } else {
+                            piecesToKeep.Add(piecesInLevel[i]);
                         }
                     }
                 }
+            }
+            for (int x = 0; x < piecesToDestroy.Count; x++)
+            {
+                pieceToDestroy = piecesToDestroy[x];
+                piecesInLevel.Remove(pieceToDestroy);
+                piecesToDestroy.Remove(pieceToDestroy);
+                Destroy(pieceToDestroy);
+                
             }
         }
     }
