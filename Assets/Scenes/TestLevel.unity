@@ -5130,7 +5130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8bed5f7b00a0ef4fa9664d9458c125c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelPieces:
+  levelPiecesPrefabs:
   - {fileID: 6802700469644700984, guid: d71e93d07ca846545ab9de3ef31e4066, type: 3}
   numberOfPieces: 15
   wallVerticallOffset: 0.5

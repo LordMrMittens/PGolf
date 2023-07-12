@@ -7,10 +7,11 @@ namespace LevelGeneration
 
     public class ProcLevelGenerator : MonoBehaviour
     {
-        [SerializeField] GameObject[] levelPieces;
+        [SerializeField] GameObject[] levelPiecesPrefabs;
         [SerializeField] int numberOfPieces;
         [SerializeField] float wallVerticallOffset = .5f;
         Transform originPoint;
+        List<GameObject> piecesInLevel = new List<GameObject>();
 
         public GameObject startPiece;
         public GameObject endPiece;
@@ -19,7 +20,7 @@ namespace LevelGeneration
         {
             originPoint = GameObject.Find("Origin").transform;
             Transform currentSpawn = originPoint;
-            List<GameObject> piecesInLevel = new List<GameObject>();
+            
             APiece previousPiece = null;
             for (int i = 0; i < numberOfPieces; i++)
             {
@@ -27,8 +28,8 @@ namespace LevelGeneration
                 {
                     return;
                 }
-                int pieceInt = Random.Range(0, levelPieces.Length);
-                GameObject levelPiece = Instantiate(levelPieces[pieceInt], currentSpawn.position, Quaternion.identity);
+                int pieceInt = Random.Range(0, levelPiecesPrefabs.Length);
+                GameObject levelPiece = Instantiate(levelPiecesPrefabs[pieceInt], currentSpawn.position, Quaternion.identity);
                 APiece piece = new APiece();
                 piece.NewPiece(previousPiece, levelPiece);
                 previousPiece = piece;
@@ -117,6 +118,27 @@ namespace LevelGeneration
             for (int i = 0; i < invalidSockets.Count; i++)
             {
                 DestroyImmediate(invalidSockets[i]);
+            }
+        }
+
+        void VerifyPositions(){
+            List<GameObject> piecesToDestroy = new List<GameObject>();
+
+            for (int i = 0; i < piecesInLevel.Count; i++)
+            {
+                for (int j = 0; j < piecesInLevel.Count; j++)
+                {
+                    float pieceDistance = Vector3.Distance(piecesInLevel[i].transform.position, piecesInLevel[j].transform.position);
+                    if (pieceDistance > 1)
+                    {
+                        if (piecesInLevel[i] != endPiece && piecesInLevel[i] != startPiece)
+                        {
+                            piecesToDestroy.Add(piecesInLevel[i]);
+                        } else {
+                            piecesToDestroy.Add(piecesInLevel[j]);
+                        }
+                    }
+                }
             }
         }
     }
