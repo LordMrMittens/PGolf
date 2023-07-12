@@ -5100,6 +5100,9 @@ MonoBehaviour:
   ObstacleLayers:
     serializedVersion: 2
     m_Bits: 256
+  GroundLayers:
+    serializedVersion: 2
+    m_Bits: 384
 --- !u!4 &1864291457
 Transform:
   m_ObjectHideFlags: 0
@@ -5131,6 +5134,8 @@ MonoBehaviour:
   - {fileID: 6802700469644700984, guid: d71e93d07ca846545ab9de3ef31e4066, type: 3}
   numberOfPieces: 15
   wallVerticallOffset: 0.5
+  startPiece: {fileID: 0}
+  endPiece: {fileID: 0}
 --- !u!1 &1892176657
 GameObject:
   m_ObjectHideFlags: 0

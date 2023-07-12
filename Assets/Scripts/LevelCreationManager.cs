@@ -17,6 +17,7 @@ namespace LevelGeneration
         [SerializeField] float minDistanceFromObstacles = .1f;
         [SerializeField] float minDistanceBetweenStartAndGoal = 1;
         [SerializeField] LayerMask ObstacleLayers;
+        [SerializeField] LayerMask GroundLayers;
         Vector3 ballSpawnVerticalOffset = new Vector3(0, .3f, 0);
 
         ProcLevelGenerator levelGenerator;
@@ -79,12 +80,24 @@ namespace LevelGeneration
             Bounds levelBounds = GetLevelBounds();
             float RandomX = Random.Range(levelBounds.min.x, levelBounds.max.x);
             float RandomZ = Random.Range(levelBounds.min.z, levelBounds.max.z);
-            Vector3 randomLocation = new Vector3(RandomX, 0, RandomZ);
-            if (Physics.OverlapSphere(randomLocation, minDistanceFromObstacles, ObstacleLayers).Length > 0)
+            Vector3 randomLocation = new Vector3(RandomX, 50, RandomZ);
+            RaycastHit hit;
+            if (Physics.Raycast(randomLocation, Vector3.down, out hit, 70, GroundLayers))
             {
-                return GenerateRandomPointInLevel();
+                if (!hit.collider.CompareTag("Ground"))
+                {
+                    return GenerateRandomPointInLevel();
+                }
+                if (Physics.OverlapSphere(hit.point, minDistanceFromObstacles, ObstacleLayers).Length > 0)
+                {
+                    return GenerateRandomPointInLevel();
+                }
+                if( hit.collider.gameObject == levelGenerator.startPiece || hit.collider.gameObject == levelGenerator.endPiece){
+                    return GenerateRandomPointInLevel();
+                }
+                return hit.point;
             }
-            return randomLocation;
+            return GenerateRandomPointInLevel();
         }
 private Bounds GetLevelBounds()
         {
