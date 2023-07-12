@@ -11,6 +11,9 @@ namespace LevelGeneration
         [SerializeField] int numberOfPieces;
         [SerializeField] float wallVerticallOffset = .5f;
         Transform originPoint;
+
+        public GameObject startPiece;
+        public GameObject endPiece;
         // Start is called before the first frame update
         public void GenerateLevel()
         {
@@ -34,8 +37,7 @@ namespace LevelGeneration
                 piecesInLevel.Add(levelPiece);
                 if (piece.parent == null)
                 {
-                    levelPiece.tag = "Ground";
-                    levelPiece.layer = LayerMask.NameToLayer("Ground");
+                    startPiece = levelPiece;
                     currentSpawn = piece.GetSpawnSocket();
                     continue;
                 }
@@ -57,6 +59,7 @@ namespace LevelGeneration
                 {
                     currentSpawn = CheckForValidSpawnPoint(piece);
                 }
+                endPiece = levelPiece;
                 //continue
             }
 

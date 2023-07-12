@@ -66,13 +66,8 @@ namespace LevelGeneration
 
         private void SpawnStartAndGoalPoints()
         {
-            Vector3 startingPoint = Vector3.zero;
-            Vector3 goalPoint = Vector3.zero;
-            do
-            {
-                startingPoint = GenerateRandomPointInLevel();
-                goalPoint = GenerateRandomPointInLevel();
-            } while (Vector3.Distance(startingPoint, goalPoint) < minDistanceBetweenStartAndGoal);
+            Vector3 startingPoint = levelGenerator.startPiece.transform.position;
+            Vector3 goalPoint = levelGenerator.endPiece.transform.position;
             Instantiate(startingPointPrefab, startingPoint, Quaternion.identity);
             Instantiate(ballPrefab, startingPoint + ballSpawnVerticalOffset, Quaternion.identity);
             Instantiate(goalPrefab, goalPoint, Quaternion.identity);
