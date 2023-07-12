@@ -789,7 +789,7 @@ GameObject:
   - component: {fileID: 6802700469644700985}
   m_Layer: 0
   m_Name: LevelPiece_1
-  m_TagString: Untagged
+  m_TagString: LevelPiece
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

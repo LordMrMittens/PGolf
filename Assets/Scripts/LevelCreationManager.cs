@@ -91,48 +91,48 @@ namespace LevelGeneration
             }
             return randomLocation;
         }
-        private Bounds GetLevelBounds()
+private Bounds GetLevelBounds()
         {
-            stage = GameObject.FindGameObjectWithTag("Ground");
             float maxX = Mathf.Infinity; ;
             float maxY = Mathf.Infinity; ;
             float maxZ = Mathf.Infinity;
             float minX = Mathf.Infinity;
             float minY = Mathf.Infinity;
             float minZ = Mathf.Infinity;
-            Collider[] allColliders = stage.GetComponentsInChildren<Collider>();
-            foreach (Collider collider in allColliders)
+            GameObject[] levelPieces = GameObject.FindGameObjectsWithTag("LevelPiece");
+            foreach (GameObject collider in levelPieces)
             {
-                Bounds currentColliderBounds = collider.bounds;
-                if (maxX > currentColliderBounds.max.x || maxX == Mathf.Infinity)
+                
+                if (maxX > collider.transform.position.x || maxX == Mathf.Infinity)
                 {
-                    maxX = currentColliderBounds.max.x;
+                    maxX = collider.transform.position.x + 5;
                 }
-                if (maxY > currentColliderBounds.max.y || maxY == Mathf.Infinity)
+                if (maxY > collider.transform.position.y || maxY == Mathf.Infinity)
                 {
-                    maxY = currentColliderBounds.max.y;
+                    maxY = collider.transform.position.y + 5;
                 }
-                if (maxZ > currentColliderBounds.max.z || maxZ == Mathf.Infinity)
+                if (maxZ > collider.transform.position.z || maxZ == Mathf.Infinity)
                 {
-                    maxZ = currentColliderBounds.max.z;
+                    maxZ = collider.transform.position.z+ 5;
                 }
-                if (minX < currentColliderBounds.min.x|| minX == Mathf.Infinity)
+                if (minX < collider.transform.position.x|| minX == Mathf.Infinity)
                 {
-                    minX = currentColliderBounds.min.x;
+                    minX = collider.transform.position.x -5;
                 }
-                if (minY < currentColliderBounds.min.y|| minY == Mathf.Infinity)
+                if (minY < collider.transform.position.y|| minY == Mathf.Infinity)
                 {
-                    minY = currentColliderBounds.min.y;
+                    minY = collider.transform.position.y -5;
                 }
-                if (minZ < currentColliderBounds.min.z|| minZ == Mathf.Infinity)
+                if (minZ < collider.transform.position.z|| minZ == Mathf.Infinity)
                 {
-                    minZ = currentColliderBounds.min.z;
+                    minZ = collider.transform.position.z -5;
                 }
             }
-            Debug.Log(minZ);
+           
             Bounds bounds = new Bounds();
             bounds.min = new Vector3(minX, minY, minZ);
             bounds.max = new Vector3(maxX, maxY, maxZ);
+            Debug.Log(bounds);
             return bounds;
 
         }
