@@ -7,7 +7,7 @@ public class GameManager : Singleton<GameManager>
     [field : SerializeField] public int par { get; set; } = 2;
     public int currentScore { get; private set; } = 0;
     public UIManager uIManager { get; set; }
-    public LevelCreationManager levelCreator { get; set; }
+    public LevelGeneration.LevelCreationManager levelCreator { get; set; }
 
     protected override void Awake()
     {
@@ -19,7 +19,7 @@ public class GameManager : Singleton<GameManager>
     private void AssignManagers()
     {
         uIManager = GameObject.FindObjectOfType<UIManager>();
-        levelCreator = GameObject.FindObjectOfType<LevelCreationManager>();
+        levelCreator = GameObject.FindObjectOfType<LevelGeneration.LevelCreationManager>();
     }
     public void AddPointsToScore(int points)
     {

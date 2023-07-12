@@ -1,98 +1,101 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-class APiece
+namespace LevelGeneration
 {
-    public List<Transform> sockets = new List<Transform>();
-    public APiece parent;
-    public GameObject levelPieceObject;
-    public bool bIsSquare;
-    int getSocketTries = 10;
+    class APiece
+    {
+        public List<Transform> sockets = new List<Transform>();
+        public APiece parent;
+        public GameObject levelPieceObject;
+        public bool bIsSquare;
+        int getSocketTries = 10;
 
-    public void NewPiece(APiece _parent, GameObject _levelPiece)
-    {
-        parent = _parent;
-        levelPieceObject = _levelPiece;
-    }
-    public void AddSockets()
-    {
-        int index =0;
-        sockets.Clear();
-        foreach (Transform SocketTransform in levelPieceObject.transform)
+        public void NewPiece(APiece _parent, GameObject _levelPiece)
         {
-            if (SocketTransform.CompareTag("Socket"))
-            {
-                sockets.Add(SocketTransform);
-                index++;
-            }
+            parent = _parent;
+            levelPieceObject = _levelPiece;
         }
-    }
-
-    public void RemoveInvalidSocket(Transform socketLocation)
-    {
-
-        List<Transform> socketsToRemove = new List<Transform>();
-
-        foreach (Transform socket in sockets)
+        public void AddSockets()
         {
-            if (socketLocation.position == socket.position)
+            int index = 0;
+            sockets.Clear();
+            foreach (Transform SocketTransform in levelPieceObject.transform)
             {
-                socketsToRemove.Add(socket);
+                if (SocketTransform.CompareTag("Socket"))
+                {
+                    sockets.Add(SocketTransform);
+                    index++;
+                }
             }
         }
 
-        foreach (Transform socketToRemove in socketsToRemove)
-        {
-            sockets.Remove(socketToRemove);
-        }
-    }
-    public Transform GetAttachmentSocket()
-    {
-        int indexToReturn = GenerateRandomIndex();
-        return sockets[indexToReturn];
-    }
-
-    public Transform GetSpawnSocket()
-    {
-        int indexToReturn = GenerateRandomIndex();
-
-        if (indexToReturn != -1 && getSocketTries > 0)
+        public void RemoveInvalidSocket(Transform socketLocation)
         {
 
-            if (Physics.OverlapSphere(sockets[indexToReturn].position, 3).Length > 1)
+            List<Transform> socketsToRemove = new List<Transform>();
+
+            foreach (Transform socket in sockets)
             {
-                getSocketTries--;
-                return GetSpawnSocket();
+                if (socketLocation.position == socket.position)
+                {
+                    socketsToRemove.Add(socket);
+                }
             }
-            getSocketTries = 10;
+
+            foreach (Transform socketToRemove in socketsToRemove)
+            {
+                sockets.Remove(socketToRemove);
+            }
+        }
+        public Transform GetAttachmentSocket()
+        {
+            int indexToReturn = GenerateRandomIndex();
             return sockets[indexToReturn];
         }
-        getSocketTries = 10;
-        return null;
 
-    }
-
-    private int GenerateRandomIndex()
-    {
-        return Random.Range(0, sockets.Count);
-    }
-
-    public List<Transform> GetWallSockets()
-    {
-
-        AddSockets();
-        List<Transform> socketsToRemove = new List<Transform>();
-        foreach (Transform socket in sockets)
+        public Transform GetSpawnSocket()
         {
-            if (Physics.OverlapSphere(socket.position, .5f).Length > 1)
+            int indexToReturn = GenerateRandomIndex();
+
+            if (indexToReturn != -1 && getSocketTries > 0)
             {
-                socketsToRemove.Add(socket);
+
+                if (Physics.OverlapSphere(sockets[indexToReturn].position, 3).Length > 1)
+                {
+                    getSocketTries--;
+                    return GetSpawnSocket();
+                }
+                getSocketTries = 10;
+                return sockets[indexToReturn];
             }
+            getSocketTries = 10;
+            return null;
+
         }
-        foreach (Transform socketToRemove in socketsToRemove)
+
+        private int GenerateRandomIndex()
         {
-            sockets.Remove(socketToRemove);
+            return Random.Range(0, sockets.Count);
         }
-        return sockets;
+
+        public List<Transform> GetWallSockets()
+        {
+
+            AddSockets();
+            List<Transform> socketsToRemove = new List<Transform>();
+            foreach (Transform socket in sockets)
+            {
+                if (Physics.OverlapSphere(socket.position, .5f).Length > 1)
+                {
+                    socketsToRemove.Add(socket);
+                }
+            }
+            foreach (Transform socketToRemove in socketsToRemove)
+            {
+                sockets.Remove(socketToRemove);
+            }
+            return sockets;
+        }
     }
 }

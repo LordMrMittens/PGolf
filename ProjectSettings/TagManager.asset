@@ -8,6 +8,7 @@ TagManager:
   - Goal
   - Ground
   - Socket
+  - Obstacle
   layers:
   - Default
   - TransparentFX
