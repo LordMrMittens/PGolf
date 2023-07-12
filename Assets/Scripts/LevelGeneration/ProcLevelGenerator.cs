@@ -121,7 +121,8 @@ namespace LevelGeneration
             }
         }
 
-        void VerifyPositions(){
+        void VerifyPositions()
+        {
             List<GameObject> piecesToDestroy = new List<GameObject>();
             List<GameObject> piecesToKeep = new List<GameObject>();
             GameObject pieceToDestroy;
@@ -135,9 +136,19 @@ namespace LevelGeneration
                     {
                         if ((piecesInLevel[i] == endPiece || piecesInLevel[i] == startPiece) && piecesInLevel[i] != piecesInLevel[j])
                         {
-                            piecesToDestroy.Add(piecesInLevel[j]);
-                        } else {
-                            piecesToKeep.Add(piecesInLevel[i]);
+                            if (!piecesToKeep.Contains(piecesInLevel[j]))
+                            {
+                                piecesToDestroy.Add(piecesInLevel[j]);
+                                piecesToKeep.Add(piecesInLevel[i]);
+                            }
+                        }
+                        else
+                        {
+                            if (!piecesToKeep.Contains(piecesInLevel[i]))
+                            {
+                                piecesToKeep.Add(piecesInLevel[i]);
+                                piecesToKeep.Add(piecesInLevel[j]);
+                            }
                         }
                     }
                 }
@@ -146,7 +157,6 @@ namespace LevelGeneration
             {
                 pieceToDestroy = piecesToDestroy[x];
                 piecesInLevel.Remove(pieceToDestroy);
-                piecesToDestroy.Remove(pieceToDestroy);
                 Destroy(pieceToDestroy);
                 
             }
