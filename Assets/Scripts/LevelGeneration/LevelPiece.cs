@@ -16,11 +16,14 @@ class APiece
     }
     public void AddSockets()
     {
+        int index =0;
+        sockets.Clear();
         foreach (Transform SocketTransform in levelPieceObject.transform)
         {
             if (SocketTransform.CompareTag("Socket"))
             {
                 sockets.Add(SocketTransform);
+                index++;
             }
         }
     }
@@ -35,14 +38,12 @@ class APiece
             if (socketLocation.position == socket.position)
             {
                 socketsToRemove.Add(socket);
-                Debug.Log("Socket to be removed: " + socket.name);
             }
         }
 
         foreach (Transform socketToRemove in socketsToRemove)
         {
             sockets.Remove(socketToRemove);
-            Debug.Log("Socket Removed: " + socketToRemove.name);
         }
     }
     public Transform GetAttachmentSocket()
@@ -74,5 +75,24 @@ class APiece
     private int GenerateRandomIndex()
     {
         return Random.Range(0, sockets.Count);
+    }
+
+    public List<Transform> GetWallSockets()
+    {
+
+        AddSockets();
+        List<Transform> socketsToRemove = new List<Transform>();
+        foreach (Transform socket in sockets)
+        {
+            if (Physics.OverlapSphere(socket.position, .5f).Length > 1)
+            {
+                socketsToRemove.Add(socket);
+            }
+        }
+        foreach (Transform socketToRemove in socketsToRemove)
+        {
+            sockets.Remove(socketToRemove);
+        }
+        return sockets;
     }
 }

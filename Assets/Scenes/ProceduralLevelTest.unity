@@ -362,7 +362,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelPieces:
   - {fileID: 6802700469644700984, guid: d71e93d07ca846545ab9de3ef31e4066, type: 3}
-  numberOfPieces: 200
+  numberOfPieces: 15
+  wallPrefab: {fileID: 5017444861844559173, guid: c3e614c6b5b7afe4cb004ef806a92536, type: 3}
 --- !u!4 &1438598361
 Transform:
   m_ObjectHideFlags: 0
