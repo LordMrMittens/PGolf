@@ -61,7 +61,8 @@ namespace LevelGeneration
 
         Vector3 SetObstacleLocationAndRotation(out float randomRotation)
         {
-            //randomRotation = Random.Range(0f, 360f);
+            float[] availableRotations = new float[3] {0f,45f,90f};
+            randomRotation = availableRotations[Random.Range(0, availableRotations.Length)];
             return GenerateRandomPointInLevel();
         }
 
