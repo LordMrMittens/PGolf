@@ -7,7 +7,7 @@ public class SceneController : MonoBehaviour
 {
     public void LoadNewScene()
     {
-        GameManager.Instance.ResetGame();
         SceneManager.LoadScene(0);
+        GameManager.Instance.ResetGame();
     }
 }

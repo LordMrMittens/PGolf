@@ -19,10 +19,20 @@ public class GameManager : Singleton<GameManager>
         ResetGame();
         
     }
+        public void ResetGame()
+    {
+        AssignManagers();
+        levelCreator.SetupGame();
+        currentScore = 0;
+        DisplayPowerLevel(0, false);
+        uIManager.UpdateScore(currentScore);
+        SetLevelPar();
+    }
     private void AssignManagers()
     {
         uIManager = GameObject.FindObjectOfType<UIManager>();
         levelCreator = GameObject.FindObjectOfType<LevelGeneration.LevelCreationManager>();
+
     }
     public void AddPointsToScore(int points)
     {
@@ -38,15 +48,7 @@ public class GameManager : Singleton<GameManager>
         uIManager.UpdatePowerLevel(powerLevel);
         uIManager.TogglePowerLevelPanel(shouldPanelBeOn);
     }
-    public void ResetGame()
-    {
-        AssignManagers();
-        levelCreator.SetupGame();
-        currentScore = 0;
-        DisplayPowerLevel(0, false);
-        uIManager.UpdateScore(currentScore);
-        SetLevelPar();
-    }
+
     public void SetLevelPar(){
         par = minPar;
         Vector3 startPos = GameObject.FindGameObjectWithTag("Start").transform.position;
@@ -64,5 +66,10 @@ public class GameManager : Singleton<GameManager>
         }
         uIManager.UpdateLevelPar(par);
     }
-
+    
+private void Update() {
+    if (uIManager == null|| levelCreator ==null){ // dropping references for some reason try not to have this as the solution 
+        AssignManagers();
+    }
+}
 }
