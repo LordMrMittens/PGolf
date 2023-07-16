@@ -1920,7 +1920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9b0e60488bbad4caf62df86b02cf51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMultiplier: 2
+  forceMultiplier: 5
   balls:
     serializedVersion: 2
     m_Bits: 64
@@ -1929,7 +1929,7 @@ MonoBehaviour:
     m_Bits: 128
   SlingshotPrefab: {fileID: 1214404966358681961, guid: 59b1d15d51118884f8a48fdaa4183c0d, type: 3}
   dragSpeed: 5
-  MaxPullDistance: 10
+  MaxPullDistance: 3
 --- !u!4 &574246680
 Transform:
   m_ObjectHideFlags: 0
@@ -5093,10 +5093,10 @@ MonoBehaviour:
   - {fileID: 3763951489997810435, guid: 38a0bb0b6cf73a34ea0ce73054d4b983, type: 3}
   - {fileID: 3763951489997810435, guid: 2b7b5cd4e9e590741967871af944b43e, type: 3}
   bumperPrefab: {fileID: 8500650479413364728, guid: f6659ad2224cd934d8d5b343674b1820, type: 3}
-  numberOfObstacles: 3
-  numberOfBumpers: 3
-  minDistanceFromObstacles: 2
-  minDistanceBetweenStartAndGoal: 2
+  numberOfObstacles: 0
+  numberOfBumpers: 0
+  minDistanceFromObstacles: 0
+  minDistanceBetweenStartAndGoal: 0
   ObstacleLayers:
     serializedVersion: 2
     m_Bits: 256
@@ -5132,7 +5132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelPiecesPrefabs:
   - {fileID: 6802700469644700984, guid: d71e93d07ca846545ab9de3ef31e4066, type: 3}
-  numberOfPieces: 15
+  numberOfPieces: 2
   wallVerticallOffset: 0.5
   startPiece: {fileID: 0}
   endPiece: {fileID: 0}

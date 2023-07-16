@@ -22,4 +22,8 @@ public class Obstacle : MonoBehaviour
             ballRB.AddForce(averageReflectionDir * bumperForce, ForceMode.Impulse);
         }
     }
+
+    public void SetBumberForce(int _bumperForce){
+        bumperForce = _bumperForce;
+    }
 }

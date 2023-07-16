@@ -35,6 +35,7 @@ public class Slingshot : MonoBehaviour
                 Ball selectedBall = hit.collider.gameObject.GetComponent<Ball>();
                 if (selectedBall != null && !selectedBall.isMoving)
                 {
+                    selectedBall.SetIsGrabbed(true);
                     selectedObject = hit.collider.gameObject;
                     initialLocation = selectedObject.transform.position;
                     GameObject Slingshot = Instantiate(SlingshotPrefab, initialLocation, Quaternion.identity);
@@ -55,7 +56,7 @@ public class Slingshot : MonoBehaviour
                     Vector3 dragPosition = hit.point;
                     dragPosition.y = selectedObject.transform.position.y; // this should be half the selected object so it doesnt go into the ground
                     var step = dragSpeed * Time.deltaTime; // calculate distance to move towards cursor
-                    if (pullDistance * forceMultiplier <= MaxPullDistance)
+                    if (pullDistance <= MaxPullDistance)
                     {
                         selectedObject.transform.position = Vector3.MoveTowards(selectedObject.transform.position, dragPosition, step);
                     }
@@ -65,8 +66,7 @@ public class Slingshot : MonoBehaviour
                     }
                     Sling.transform.LookAt(selectedObject.transform, Vector3.up);
                 }
-
-                GameManager.Instance.DisplayPowerLevel(pullDistance * forceMultiplier, true);
+                GameManager.Instance.DisplayPowerLevel(pullDistance / MaxPullDistance *10f, true);
             }
         }
         if (Input.GetMouseButtonUp(0))
@@ -84,6 +84,7 @@ public class Slingshot : MonoBehaviour
                     cameraController.objectToFollowRB = BallRB;
                     Destroy(Sling);
                     GameManager.Instance.AddPointsToScore(1);
+                    selectedBall.SetIsGrabbed(false);
                     StartCoroutine(selectedBall.WaitForBallToStop());
 
                 }

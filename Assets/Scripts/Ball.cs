@@ -5,7 +5,8 @@ using UnityEngine.Events;
 public class Ball : MonoBehaviour
 {
     BreakableObstacleColour BallColour;
-    public bool isMoving { get; set; }
+    public bool isMoving { get; private set; }
+    public bool isGrabbed{ get; private set; } = false;
     Rigidbody ballRB;
     ParticleSystem particles;
     [SerializeField] float ballStopVelocityOverride = .1f;
@@ -87,7 +88,9 @@ public class Ball : MonoBehaviour
 
         yield return new WaitUntil(() => isMoving == false);
         UseUpPowerUpShot();
+    }
 
-
+    public void SetIsGrabbed(bool _isGrabbed){
+        isGrabbed = _isGrabbed;
     }
 }

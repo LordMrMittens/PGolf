@@ -92,6 +92,8 @@ namespace LevelGeneration
                 wall.transform.rotation = remainingSockets[i].transform.rotation;
                 wall.transform.localScale = new Vector3(11, 1, 1);
                 wall.transform.parent = remainingSockets[i].transform;
+                Obstacle wallObstacle = wall.AddComponent<Obstacle>();
+                wallObstacle.SetBumberForce(1);
                 wall.tag = "Obstacle";
                 wall.layer = LayerMask.NameToLayer("Obstacles");
             }
@@ -131,7 +133,6 @@ namespace LevelGeneration
                 for (int j = 0; j < piecesInLevel.Count; j++)
                 {
                     float pieceDistance = Vector3.Distance(piecesInLevel[i].transform.position, piecesInLevel[j].transform.position);
-                    Debug.Log(pieceDistance);
                     if (pieceDistance < .1)
                     {
                         if ((piecesInLevel[i] == endPiece || piecesInLevel[i] == startPiece) && piecesInLevel[i] != piecesInLevel[j])
