@@ -9,6 +9,8 @@ public class PowerNode : MonoBehaviour
     [SerializeField] float timeBetweenColourChanges = 3.0f;
     float colourChangeTimer;
     ParticleSystem nodeParticles;
+
+    bool canColourSwap = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,19 +21,18 @@ public class PowerNode : MonoBehaviour
     void Update()
     {
         colourChangeTimer += Time.deltaTime;
-        if (colourChangeTimer > timeBetweenColourChanges)
+        if (colourChangeTimer > timeBetweenColourChanges && canColourSwap)
         {
-            ChangeColour();
-            colourChangeTimer = 0;
+            ChangeColour(Random.Range(1, System.Enum.GetValues(typeof(BreakableObstacleColour)).Length));
+            
         }
     }
 
-    void ChangeColour()
+    void ChangeColour(int colour = 0)
     {
-        int colourIndex = Random.Range(1, System.Enum.GetValues(typeof(BreakableObstacleColour)).Length);
 
-        nodeColour = (BreakableObstacleColour)colourIndex;
-
+        nodeColour = (BreakableObstacleColour)colour;
+        colourChangeTimer = 0;
         ParticleSystem.MainModule main = nodeParticles.main;
         switch (nodeColour)
         {
@@ -66,9 +67,18 @@ public class PowerNode : MonoBehaviour
             Ball ball = other.GetComponent<Ball>();
             if (nodeColour != BreakableObstacleColour.none)
             {
+                canColourSwap = false;
                 ball.SetBallColour(nodeColour);
+                ChangeColour(0);
                 nodeColour = BreakableObstacleColour.none;
             }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Ball"))
+        {
+            canColourSwap=true;
         }
     }
 }
