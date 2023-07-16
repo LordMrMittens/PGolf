@@ -20,8 +20,19 @@ public class CameraController : MonoBehaviour
     private Vector3 goalPosition;
     private Vector3 directionOfShot;
 
+    Ball ball;
+
+    
+
     private void LateUpdate()
     {
+        if( ball == null){
+            ball = GameObject.FindObjectOfType<Ball>();
+        } else {
+            if (ball.isMoving && ball.isGrabbed ==false){
+                objectToFollowRB = ball.gameObject.GetComponent<Rigidbody>();
+            }
+        }
         if (objectToFollowRB != null)
         {
             objectNullCounter += Time.deltaTime;

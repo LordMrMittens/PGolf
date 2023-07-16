@@ -5089,19 +5089,22 @@ MonoBehaviour:
   ballPrefab: {fileID: 5080804293660045877, guid: eb1cdd1f05c50b5498e1bf59566e59f0, type: 3}
   obstaclePrefabs:
   - {fileID: 759610980796211689, guid: 83f86fbaf6fc361419c458142e7d3b77, type: 3}
-  breakableObstaclePrefab:
+  breakableObstaclePrefabs:
   - {fileID: 3763951489997810435, guid: 2b7b5cd4e9e590741967871af944b43e, type: 3}
-  movingObstaclePrefab:
+  movingObstaclePrefabs:
   - {fileID: 3763951489997810435, guid: 38a0bb0b6cf73a34ea0ce73054d4b983, type: 3}
-  spinningObstaclePrefab:
+  spinningObstaclePrefabs:
   - {fileID: 7451741859196420509, guid: 14df325a3df81fd4e957292fc8943dc2, type: 3}
   bumperPrefabs:
   - {fileID: 8500650479413364728, guid: f6659ad2224cd934d8d5b343674b1820, type: 3}
+  powerNodePrefab:
+  - {fileID: 5596979110487095021, guid: 7e705a7aed793bd4f995f7b6b9a91964, type: 3}
   numberOfObstacles: 3
   numberOfMovingObstacles: 3
   numberOfBreakableObstacles: 3
   numberOfSpinningObstacles: 3
   numberOfBumpers: 10
+  numberOfPowerNodesToSpawn: 4
   minDistanceFromObstacles: 3
   minDistanceBetweenStartAndGoal: 1
   ObstacleLayers:
