@@ -481,6 +481,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <bumperForce>k__BackingField: 2
+  levelBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!1 &252372566
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,6 +941,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <bumperForce>k__BackingField: 2
+  levelBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!1 &389665855
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,6 +1517,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <bumperForce>k__BackingField: 2
+  levelBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!1 &468857146
 GameObject:
   m_ObjectHideFlags: 0
@@ -3761,6 +3770,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <bumperForce>k__BackingField: 2
+  levelBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!1 &1492850601
 GameObject:
   m_ObjectHideFlags: 0
@@ -5099,12 +5111,12 @@ MonoBehaviour:
   - {fileID: 8500650479413364728, guid: f6659ad2224cd934d8d5b343674b1820, type: 3}
   powerNodePrefab:
   - {fileID: 5596979110487095021, guid: 7e705a7aed793bd4f995f7b6b9a91964, type: 3}
-  numberOfObstacles: 3
-  numberOfMovingObstacles: 3
-  numberOfBreakableObstacles: 3
-  numberOfSpinningObstacles: 3
-  numberOfBumpers: 10
-  numberOfPowerNodesToSpawn: 4
+  numberOfObstacles: 0
+  numberOfMovingObstacles: 0
+  numberOfBreakableObstacles: 15
+  numberOfSpinningObstacles: 0
+  numberOfBumpers: 0
+  numberOfPowerNodesToSpawn: 15
   minDistanceFromObstacles: 3
   minDistanceBetweenStartAndGoal: 1
   ObstacleLayers:

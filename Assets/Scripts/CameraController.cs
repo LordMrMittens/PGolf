@@ -55,6 +55,7 @@ public class CameraController : MonoBehaviour
         {
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
+            verticalOffset += Input.mouseScrollDelta.y;
 
             transform.RotateAround(playerPosition, Vector3.up, horizontalInput * horizontalRotationSpeed);
 
