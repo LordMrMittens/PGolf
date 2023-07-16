@@ -5094,7 +5094,7 @@ MonoBehaviour:
   - {fileID: 3763951489997810435, guid: 2b7b5cd4e9e590741967871af944b43e, type: 3}
   bumperPrefab: {fileID: 8500650479413364728, guid: f6659ad2224cd934d8d5b343674b1820, type: 3}
   numberOfObstacles: 5
-  numberOfBumpers: 10
+  numberOfBumpers: 15
   minDistanceFromObstacles: 3
   minDistanceBetweenStartAndGoal: 1
   ObstacleLayers:
