@@ -12,8 +12,8 @@ namespace LevelGeneration
         [SerializeField] GameObject[] obstaclePrefabs;
         [SerializeField] GameObject bumperPrefab;
         GameObject stage;
-        [SerializeField] int numberOfObstacles = 4;
-        [SerializeField] int numberOfBumpers = 4;
+        [SerializeField] public int numberOfObstacles = 4;
+        [SerializeField] public int numberOfBumpers = 4;
         [SerializeField] float minDistanceFromObstacles = .1f;
         [SerializeField] float minDistanceBetweenStartAndGoal = 1;
         [SerializeField] LayerMask ObstacleLayers;
@@ -26,7 +26,6 @@ namespace LevelGeneration
         private void Awake()
         {
             levelGenerator = GetComponent<ProcLevelGenerator>();
-            SetupGame();
         }
         public void SetupGame()
         {
@@ -141,7 +140,6 @@ private Bounds GetLevelBounds()
             Bounds bounds = new Bounds();
             bounds.min = new Vector3(minX, minY, minZ);
             bounds.max = new Vector3(maxX, maxY, maxZ);
-            Debug.Log(bounds);
             return bounds;
 
         }

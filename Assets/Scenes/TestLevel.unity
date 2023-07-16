@@ -5384,6 +5384,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <par>k__BackingField: 2
+  <minPar>k__BackingField: 2
+  layersInfluencingParCalculation:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!4 &1917155728
 Transform:
   m_ObjectHideFlags: 0

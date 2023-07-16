@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    [field : SerializeField] public int par { get; set; } = 2;
+    [field : SerializeField] public int par { get; private set;}
+    [field : SerializeField] public int minPar { get; private set; } = 2;
     public int currentScore { get; private set; } = 0;
     public UIManager uIManager { get; set; }
     public LevelGeneration.LevelCreationManager levelCreator { get; set; }
+
+    [SerializeField] LayerMask layersInfluencingParCalculation;
 
     protected override void Awake()
     {
@@ -38,11 +41,28 @@ public class GameManager : Singleton<GameManager>
     public void ResetGame()
     {
         AssignManagers();
+        levelCreator.SetupGame();
         currentScore = 0;
         DisplayPowerLevel(0, false);
-        uIManager.UpdateLevelPar(par);
         uIManager.UpdateScore(currentScore);
-
+        SetLevelPar();
+    }
+    public void SetLevelPar(){
+        par = minPar;
+        Vector3 startPos = GameObject.FindGameObjectWithTag("Start").transform.position;
+        Vector3 goalPos = GameObject.FindGameObjectWithTag("Goal").transform.position;
+        float distance = Vector3.Distance(startPos, goalPos);
+        if (distance >30){
+            par += Mathf.FloorToInt(distance/10);
+        }
+        par += Mathf.FloorToInt((levelCreator.numberOfObstacles + levelCreator.numberOfBumpers) /10);
+        Vector3 direction = goalPos-startPos;
+        if(Physics.Raycast(startPos, direction, distance, layersInfluencingParCalculation)){
+            par++;
+        } else {
+            par--;
+        }
+        uIManager.UpdateLevelPar(par);
     }
 
 }
