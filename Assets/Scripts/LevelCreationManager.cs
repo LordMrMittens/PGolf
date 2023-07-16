@@ -10,10 +10,18 @@ namespace LevelGeneration
         [SerializeField] GameObject goalPrefab;
         [SerializeField] GameObject ballPrefab;
         [SerializeField] GameObject[] obstaclePrefabs;
-        [SerializeField] GameObject bumperPrefab;
+        [SerializeField] GameObject[] breakableObstaclePrefabs;
+        [SerializeField] GameObject[] movingObstaclePrefabs;
+        [SerializeField] GameObject[] spinningObstaclePrefabs;
+        [SerializeField] GameObject[] bumperPrefabs;
+        [SerializeField] GameObject[] powerNodePrefab;
         GameObject stage;
         [SerializeField] public int numberOfObstacles = 4;
+        [SerializeField] public int numberOfMovingObstacles = 3;
+        [SerializeField] public int numberOfBreakableObstacles = 3;
+        [SerializeField] public int numberOfSpinningObstacles = 3;
         [SerializeField] public int numberOfBumpers = 4;
+        [SerializeField] public int numberOfPowerNodesToSpawn = 4;
         [SerializeField] float minDistanceFromObstacles = .1f;
         [SerializeField] float minDistanceBetweenStartAndGoal = 1;
         [SerializeField] LayerMask ObstacleLayers;
@@ -30,31 +38,25 @@ namespace LevelGeneration
         public void SetupGame()
         {
             levelGenerator.GenerateLevel();
-            SpawnObstacles();
-            SpawnBumpers();
+            SpawnLevelObjects(obstaclePrefabs,numberOfObstacles);
+            SpawnLevelObjects(bumperPrefabs,numberOfBumpers);
+            SpawnLevelObjects(movingObstaclePrefabs,numberOfMovingObstacles);
+            SpawnLevelObjects(breakableObstaclePrefabs,numberOfBreakableObstacles);
+            SpawnLevelObjects(spinningObstaclePrefabs,numberOfSpinningObstacles);
+            SpawnLevelObjects(powerNodePrefab,numberOfPowerNodesToSpawn);
             SpawnStartAndGoalPoints();
+
         }
 
-
-        public void SpawnObstacles()
+        public void SpawnLevelObjects(GameObject[] _objectsToSpawn, int numberToSpawn)
         {
-            for (int i = 0; i < numberOfObstacles; i++)
+            for (int i = 0; i < numberToSpawn; i++)
             {
-                int randomObstaclePrefabIndex = Random.Range(0, obstaclePrefabs.Length);
+                int randomObstaclePrefabIndex = Random.Range(0, _objectsToSpawn.Length);
                 float randomRotation;
                 Vector3 ObstacleLocation = SetObstacleLocationAndRotation(out randomRotation);
-                GameObject obstacle = Instantiate(obstaclePrefabs[randomObstaclePrefabIndex], ObstacleLocation, Quaternion.identity);
+                GameObject obstacle = Instantiate(_objectsToSpawn[randomObstaclePrefabIndex], ObstacleLocation, Quaternion.identity);
                 obstacle.transform.Rotate(0, randomRotation, 0);
-            }
-        }
-        public void SpawnBumpers()
-        {
-            for (int i = 0; i < numberOfBumpers; i++)
-            {
-                float randomRotation;
-                Vector3 bumperLocation = SetObstacleLocationAndRotation(out randomRotation);
-                GameObject bumper = Instantiate(bumperPrefab, bumperLocation, Quaternion.identity);
-                bumper.transform.Rotate(0, randomRotation, 0);
             }
         }
 

@@ -28,7 +28,11 @@ public class BreakableObstacle : Obstacle
     protected override void OnCollisionEnter(Collision other)
     {
         base.OnCollisionEnter(other);
-        Ball ball = other.gameObject.GetComponent<Ball>();
+
+
+    }
+    private void OnTriggerEnter(Collider other) {
+                Ball ball = other.gameObject.GetComponent<Ball>();
         if (ball != null)
         {
             if (ball.GetBallColour() == obstacleColour)
@@ -37,7 +41,6 @@ public class BreakableObstacle : Obstacle
                 Destroy(this.gameObject);
             }
         }
-
     }
 
     private void RandomiseObstacleColour(){
