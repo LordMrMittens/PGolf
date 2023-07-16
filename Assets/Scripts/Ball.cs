@@ -29,26 +29,29 @@ public class Ball : MonoBehaviour
         
     }
 
-    public void RandomiseBallColour(){
-        int indexColour = Random.Range(1, System.Enum.GetValues(typeof(BreakableObstacleColour)).Length+1);
-        {
-            BallColour = (BreakableObstacleColour)indexColour;
-        }
+    public void SetBallColour(BreakableObstacleColour colour){
         ParticleSystem.MainModule main = particles.main;
-        switch (BallColour)
+        switch (colour)
         {
             case BreakableObstacleColour.red:
                 main.startColor = Color.red;
+                particles.gameObject.SetActive(true);
                 break;
             case BreakableObstacleColour.blue:
                 main.startColor = Color.blue;
+                particles.gameObject.SetActive(true);
                 break;
             case BreakableObstacleColour.green:
                 main.startColor = Color.green;
+                particles.gameObject.SetActive(true);
                 break;
             case BreakableObstacleColour.yellow:
                 main.startColor = Color.yellow;
+                particles.gameObject.SetActive(true);
                 break;
+            default :
+            particles.gameObject.SetActive(false);
+            break;
         }
 
     }

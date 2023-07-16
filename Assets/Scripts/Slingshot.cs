@@ -39,7 +39,6 @@ public class Slingshot : MonoBehaviour
                     initialLocation = selectedObject.transform.position;
                     GameObject Slingshot = Instantiate(SlingshotPrefab, initialLocation, Quaternion.identity);
                     Sling = Slingshot;
-                    selectedBall.RandomiseBallColour();
                 }
             }
 
