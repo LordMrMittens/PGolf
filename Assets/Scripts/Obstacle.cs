@@ -5,6 +5,8 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     [field : SerializeField] public float bumperForce {get; private set;}
+
+    public Bounds levelBounds;
     protected virtual void OnCollisionEnter(Collision other)
     {
         Vector3 averageReflectionDir = Vector3.zero;

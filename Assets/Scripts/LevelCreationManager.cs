@@ -27,7 +27,7 @@ namespace LevelGeneration
         [SerializeField] LayerMask ObstacleLayers;
         [SerializeField] LayerMask GroundLayers;
         Vector3 ballSpawnVerticalOffset = new Vector3(0, .3f, 0);
-
+        Bounds levelBounds;
         ProcLevelGenerator levelGenerator;
 
 
@@ -38,6 +38,7 @@ namespace LevelGeneration
         public void SetupGame()
         {
             levelGenerator.GenerateLevel();
+            levelBounds = GetLevelBounds();
             SpawnLevelObjects(obstaclePrefabs,numberOfObstacles);
             SpawnLevelObjects(bumperPrefabs,numberOfBumpers);
             SpawnLevelObjects(movingObstaclePrefabs,numberOfMovingObstacles);
@@ -56,6 +57,10 @@ namespace LevelGeneration
                 float randomRotation;
                 Vector3 ObstacleLocation = SetObstacleLocationAndRotation(out randomRotation);
                 GameObject obstacle = Instantiate(_objectsToSpawn[randomObstaclePrefabIndex], ObstacleLocation, Quaternion.identity);
+                Obstacle spawnedObstacle = obstacle.GetComponent<Obstacle>();
+                if(spawnedObstacle){
+                    spawnedObstacle.levelBounds=levelBounds;
+                }
                 obstacle.transform.Rotate(0, randomRotation, 0);
             }
         }
@@ -79,7 +84,7 @@ namespace LevelGeneration
 
         Vector3 GenerateRandomPointInLevel()
         {
-            Bounds levelBounds = GetLevelBounds();
+            
             float RandomX = Random.Range(levelBounds.min.x, levelBounds.max.x);
             float RandomZ = Random.Range(levelBounds.min.z, levelBounds.max.z);
             Vector3 randomLocation = new Vector3(RandomX, 50, RandomZ);
@@ -101,7 +106,7 @@ namespace LevelGeneration
             }
             return GenerateRandomPointInLevel();
         }
-private Bounds GetLevelBounds()
+public Bounds GetLevelBounds()
         {
             float maxX = Mathf.Infinity; ;
             float maxY = Mathf.Infinity; ;

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MovingObstacles : Obstacle
 {
-    GameObject stage;
     [SerializeField] float movingspeed;
     [SerializeField] List<Vector3> targetDestinations = new List<Vector3>();
     int minNumberOfDestinations = 2;
@@ -13,7 +12,6 @@ public class MovingObstacles : Obstacle
       private int currentDestinationIndex = 0;
     void Start()
     {
-        stage = GameObject.FindGameObjectWithTag("Ground");
         targetDestinations.Add(this.transform.position);
         int numberOfDestinations = Random.Range(minNumberOfDestinations, maxNumberOfDestinations+1);
         for (int i = 0; i < numberOfDestinations; i++)
@@ -25,7 +23,6 @@ public class MovingObstacles : Obstacle
 
     private Vector3 GetRandomPosition()
     {
-        Bounds levelBounds = stage.GetComponent<Collider>().bounds;
         float RandomX = Random.Range(levelBounds.min.x, levelBounds.max.x);
         float RandomZ = Random.Range(levelBounds.min.z, levelBounds.max.z);
         Vector3 randomLocation = new Vector3(RandomX, 0, RandomZ);
