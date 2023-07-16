@@ -21,22 +21,25 @@ public class PowerNode : MonoBehaviour
         colourChangeTimer += Time.deltaTime;
         if (colourChangeTimer > timeBetweenColourChanges)
         {
-            //change colour
+            ChangeColour();
             colourChangeTimer = 0;
         }
     }
 
     void ChangeColour()
     {
-        int colourIndex = Random.Range(1, System.Enum.GetValues(typeof(BreakableObstacleColour)).Length + 1);
+        int colourIndex = Random.Range(1, System.Enum.GetValues(typeof(BreakableObstacleColour)).Length);
 
         nodeColour = (BreakableObstacleColour)colourIndex;
 
         ParticleSystem.MainModule main = nodeParticles.main;
         switch (nodeColour)
         {
+            case BreakableObstacleColour.none:
+                nodeParticles.gameObject.SetActive(false);
+                break;
             case BreakableObstacleColour.red:
-            nodeParticles.gameObject.SetActive(true);
+                nodeParticles.gameObject.SetActive(true);
                 main.startColor = Color.red;
                 break;
             case BreakableObstacleColour.blue:
@@ -51,15 +54,21 @@ public class PowerNode : MonoBehaviour
             nodeParticles.gameObject.SetActive(true);
                 main.startColor = Color.yellow;
                 break;
-                default:
+            default:
                 nodeParticles.gameObject.SetActive(false);
                 break;
         }
     }
-     private void OnTriggerEnter(Collider other) {
-        if(other.CompareTag("Ball")){
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ball"))
+        {
             Ball ball = other.GetComponent<Ball>();
-            ball.SetBallColour(nodeColour);
+            if (nodeColour != BreakableObstacleColour.none)
+            {
+                ball.SetBallColour(nodeColour);
+                nodeColour = BreakableObstacleColour.none;
+            }
         }
-     }
+    }
 }

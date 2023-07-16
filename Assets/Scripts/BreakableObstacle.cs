@@ -4,10 +4,11 @@ using UnityEngine;
 
 public enum BreakableObstacleColour
 {
-    red = 1, 
-    blue = 2, 
-    green = 3, 
-    yellow =4
+    none = 0,
+    red = 1,
+    blue = 2,
+    green = 3,
+    yellow = 4
 }
 public class BreakableObstacle : Obstacle
 {
@@ -40,7 +41,7 @@ public class BreakableObstacle : Obstacle
     }
 
     private void RandomiseObstacleColour(){
-                int indexColour = Random.Range(1, System.Enum.GetValues(typeof(BreakableObstacleColour)).Length+1);
+                int indexColour = Random.Range(1, System.Enum.GetValues(typeof(BreakableObstacleColour)).Length);
         {
             obstacleColour = (BreakableObstacleColour)indexColour;
         }

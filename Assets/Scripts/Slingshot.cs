@@ -71,15 +71,22 @@ public class Slingshot : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            if (selectedObject && selectedObject.GetComponent<Rigidbody>())
+            if (selectedObject)
             {
+                Ball selectedBall = selectedObject.GetComponent<Ball>();
                 Rigidbody BallRB = selectedObject.GetComponent<Rigidbody>();
-                Vector3 direction = (initialLocation - selectedObject.transform.position);
-                BallRB.AddForce(direction * (pullDistance * forceMultiplier), ForceMode.Impulse);
-                cameraController.SetShotDirection(direction);
-                cameraController.objectToFollowRB = BallRB;
-                Destroy(Sling);
-                GameManager.Instance.AddPointsToScore(1);
+                if (selectedObject && BallRB)
+                {
+
+                    Vector3 direction = (initialLocation - selectedObject.transform.position);
+                    BallRB.AddForce(direction * (pullDistance * forceMultiplier), ForceMode.Impulse);
+                    cameraController.SetShotDirection(direction);
+                    cameraController.objectToFollowRB = BallRB;
+                    Destroy(Sling);
+                    GameManager.Instance.AddPointsToScore(1);
+                    StartCoroutine(selectedBall.WaitForBallToStop());
+
+                }
             }
             else
             {
